@@ -26,6 +26,51 @@ class Address(Base):
     person_id = Column(Integer, ForeignKey('person.id'))
     person = relationship(Person)
 
+#     class User(Base):
+#      __tablename__ = 'user'
+#      id = Column(Integer, primary_key=True)
+#     user_name = Column(String(250))
+#     first_name = Column(String(250))
+#     last_name = Column(String(250))
+#     email= Column(String(250))
+
+# class Follower(Base):
+#      __tablename__ = 'follower'
+#     user_from_id = Column(String(250), primary_key=True))  
+#     user_to_id =  Column(String(250), primary_key=True))  
+
+# class User(Base):
+#      __tablename__ = 'user'
+#      id = Column(Integer, primary_key=True)
+#      user_name = Column(String(250))
+#      first_name = Column(String(250))
+#      last_name = Column(String(250))
+#      email= Column(String(250))    
+
+
+#     class Comment(Base):
+#      __tablename__ = 'comment'
+#      id = Column(Integer)
+#      comment_text = Column(String(250))
+#      author_id= Column(String(250), primary_key=True)
+#      post_id = Column(String(250), primary_key=True)
+
+#     class Post(Base):
+#      __tablename__ = 'post'
+#      id = Column(Integer, primary_key=True)
+#      user_name = Column(String(250), primary_key=True)
+
+
+#     class Media(Base):
+#      __tablename__ = 'media'
+#      id = Column(Integer)
+#      type = Column(String(250))
+#      url = Column(String(250))
+#      id = Column(Integer, )
+#      post_id = Column(String(250), primary_key=True)
+        
+
+
     def to_dict(self):
         return {}
 
