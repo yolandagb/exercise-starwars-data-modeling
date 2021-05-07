@@ -59,23 +59,15 @@ class Like (Base):
      planets_post = Column(Integer, ForeignKey ('planets.post'))
      characters_post = Column(Integer, ForeignKey('characters.post'))
      
-# class Characters (Base):
-#     __tablename__ = 'characters'
-#     # Here we define columns for the table address.
-#     # Notice that each column is also a normal Python instance attribute.
-#     id = Column(Integer, primary_key=True)
-#     likes = Column(String(250))
-#     user_id = Column(Integer, ForeignKey('user.id'))
-#     like = Column(Integer, ForeignKey('like.id'))
-#     login = relationship('Login')
-#     user = relationship ('User')    
-
-
-#     def to_dict(self):
-#         return {}
-
-# ## Draw from SQLAlchemy base
-# render_er(Base, 'diagram.png')
+class Characters (Base):
+     __tablename__ = 'characters'
+     # Here we define columns for the table address.
+     # Notice that each column is also a normal Python instance attribute.
+     id = Column(Integer, primary_key=True)
+     likes = Column(String(250))
+     user_id = Column(Integer, ForeignKey('user.id'))
+     like = Column(Integer, ForeignKey('like.id'))
+     user = relationship ('User')    
 
 
 def to_dict(self):
