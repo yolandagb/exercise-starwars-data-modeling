@@ -42,39 +42,32 @@ Base = declarative_base()
 class User(Base):
      __tablename__ = 'User'
      id = Column(Integer, primary_key=True)
-     username = Column(String(250))
-     nickname =  Column(Integer, ForeignKey('User.user_name'))
+     nickname = Column(String(250))
      email = Column(String(250), nullable=False)
-     password = Column(Integer, ForeignKey('Login.password'))
-     Favorites = Column(Integer, ForeignKey('favorites.id'))
+     password = Column(String(120))
+     favorites_post = Column(Integer, ForeignKey('favorites.id'))
 
 class Favorites (Base):
      __tablename__ = 'favorites'
      id = Column(Integer, primary_key=True)
-     user_id = Column(Integer, ForeignKey('post.id'))
-     favorites = Column(String(250))
-    #  like = Column(Integer, ForeignKey('like.id'))
-     planets = Column(Integer, ForeignKey ('planets.post'))
-     characters = Column(Integer, ForeignKey('characters.post'))
+     user_id = Column(Integer, ForeignKey('user.id'))
+     planets_post= Column(Integer, ForeignKey ('planets.id'))
+     characters_post = Column(Integer, ForeignKey('characters.id'))
      
      
 class Characters (Base):
      __tablename__ = 'characters'
-     # Here we define columns for the table address.
-     # Notice that each column is also a normal Python instance attribute.
      id = Column(Integer, primary_key=True)
-     User_id = Column(Integer, ForeignKey('user.id')) 
-     Favorites = Column(String(250))
-     Comment = Column(String(250)) 
+     user_id = Column(Integer, ForeignKey('user.id')) 
+     favorites_list = Column(Integer, ForeignKey('favorites.id'))
+     comments = Column(String(500)) 
 
 class Planets (Base):
      __tablename__ = 'planets'
-     # Here we define columns for the table address.
-     # Notice that each column is also a normal Python instance attribute.
      id = Column(Integer, primary_key=True)
-     Favorites = Column(String(250))
-     User_id = Column(Integer, ForeignKey('user.id')) 
-     Comment = Column(String(250))      
+     favorites_list = Column(Integer, ForeignKey('favorites.id'))
+     user_id = Column(Integer, ForeignKey('user.id')) 
+     comment = Column(String(500))      
 
 
 def to_dict(self):
