@@ -40,25 +40,34 @@ Base = declarative_base()
 #     #  url = Column(String(250), nullable=False)
 
 class User(Base):
-     __tablename__ = 'User'
-     id = Column(Integer, primary_key=True)
-     nickname = Column(String(250))
-     email = Column(String(250), nullable=False)
+     __tablename__ = 'user'
+     id = db.Column(db.Integer, primary_key=True)
+     nickname = db.Column(db.String(120), nullable=False)
+     gender = db.Column(db.Enum(Gender), unique=False, nullable=False)
+     email = db.Column(db.String(120), unique=True, nullable=False)
      password = Column(String(120))
-     favorites_post = Column(Integer, ForeignKey('favorites.id'))
+     image = db.Column(db.String(120), unique=False, nullable=True)
+    
+    # RELATIONSHIP
+     favourites = db.relationship('Favourite', backref="user", lazy=True)
+     characters = db.relationship('Character', backref="user", lazy=True)
+     planets = db.relationship('Planet', backref="user", lazy=True)
 
-class Favorites (Base):
-     __tablename__ = 'favorites'
+
+class Favourite (Base):
+     __tablename__ = 'favourites'
      id = Column(Integer, primary_key=True)
      user_id = Column(Integer, ForeignKey('user.id'))
-     planets_post= Column(Integer, ForeignKey ('planets.id'))
-     characters_post = Column(Integer, ForeignKey('characters.id'))
+     favourite_planets= Column(Integer, ForeignKey ('planets.id'))
+     favourite_characters = Column(Integer, ForeignKey('characters.id'))
      
      
 class Characters (Base):
      __tablename__ = 'characters'
      id = Column(Integer, primary_key=True)
-     user_id = Column(Integer, ForeignKey('user.id')) 
+     user_id = Column(Integer, ForeignKey('user.id'))
+     image = db.Column(db.String, unique=False, nullable=False)
+     name = db.Column(db.String(120), unique=False, nullable=False) 
      favorites_list = Column(Integer, ForeignKey('favorites.id'))
      comments = Column(String(500)) 
 
