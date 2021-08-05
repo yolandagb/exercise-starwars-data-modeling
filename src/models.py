@@ -32,16 +32,16 @@ Base = declarative_base()
 
 class User(Base):
      __tablename__ = 'user'
-     id = db.Column(db.Integer, primary_key=True)
-     nickname = db.Column(db.String(120), nullable=False)
-     email = db.Column(db.String(120), unique=True, nullable=False)
+     id = Column(Integer, primary_key=True)
+     nickname = Column(String(120), nullable=False)
+     email = Column(String(120), unique=True, nullable=False)
      password = Column(String(120))
-     image = db.Column(db.String(120), unique=False, nullable=True)
+     image = Column(String(120), unique=False, nullable=True)
     
     # RELATIONSHIP
-     favourites = db.relationship('Favourite', backref="user", lazy=True)
-     characters = db.relationship('Character', backref="user", lazy=True)
-     planets = db.relationship('Planet', backref="user", lazy=True)
+     favourites = relationship('Favourite', backref="user", lazy=True)
+     characters = relationship('Character', backref="user", lazy=True)
+     planets = relationship('Planet', backref="user", lazy=True)
 
 
 class Favourite (Base):
