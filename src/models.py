@@ -32,11 +32,13 @@ Base = declarative_base()
 
 class User(Base):
      __tablename__ = 'user'
-     id = Column(Integer, primary_key=True)
-     nickname = Column(String(120), nullable=False)
-     email = Column(String(120), unique=True, nullable=False)
-     password = Column(String(120))
-     image = Column(String(120), unique=False, nullable=True)
+    user_id = Column(Integer, primary_key=True)
+    user_name = Column(String(80), unique=True, nullable=False)
+    first_name =Column(String(80), nullable=False)
+    last_name =Column(String(80), nullable=False)
+    created_at =Column(String(80))
+    updated_at =Column(String(80))
+    email =Column(String(80),unique=True, nullable=False) 
     
     # RELATIONSHIP
      favourites = relationship('Favourite', backref="user", lazy=True)
@@ -46,25 +48,31 @@ class User(Base):
 
 class Favourite (Base):
      __tablename__ = 'favourites'
-     id = Column(Integer, primary_key=True)
-     user_id = Column(Integer, ForeignKey('user.id'))
-     favourite_planets= Column(Integer, ForeignKey ('planets.id'))
-     favourite_characters = Column(Integer, ForeignKey('characters.id'))
+    like_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.user_id'))
+    fav_planet_id = Column(Integer, ForeignKey('planet.planet_id'))
+    fav_character_id = Column(Integer, ForeignKey('character.character_id'))
      
      
 class Characters (Base):
      __tablename__ = 'characters'
-     id = Column(Integer, primary_key=True)
-     user_id = Column(Integer, ForeignKey('user.id'))
-     favorites_list = Column(Integer, ForeignKey('favourites.id'))
+    character_id = Column(Integer, primary_key=True)
+    name =  Column(String(200))
+    birth_year = Column(Integer)
+    gender = Column(String(200))
+    height = Column(Integer)
+    skin_color = Column(String(200))
+    eye_color = Column(String(200))
      
 
 class Planets (Base):
      __tablename__ = 'planets'
-     id = Column(Integer, primary_key=True)
-     favorites_list = Column(Integer, ForeignKey('favourites.id'))
-     user_id = Column(Integer, ForeignKey('user.id')) 
-          
+    planet_id = Column(Integer, primary_key=True)
+    name = Column(String(200))
+    climate = Column(String(200))
+    population = Column(Integer)
+    orbital_period = Column(Integer)
+    diameter= Column(Integer)
 
 
 def to_dict(self):
