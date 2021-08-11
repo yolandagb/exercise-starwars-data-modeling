@@ -31,32 +31,32 @@ Base = declarative_base()
 
 
 class User(Base):
-     __tablename__ = 'user'
-    user_id = Column(Integer, primary_key=True)
-    user_name = Column(String(80), unique=True, nullable=False)
-    first_name =Column(String(80), nullable=False)
-    last_name =Column(String(80), nullable=False)
-    created_at =Column(String(80))
-    updated_at =Column(String(80))
+    __tablename__ = 'user'
+    id = Column(Integer, primary_key=True)
+    user_name = Column(String(120), unique=True, nullable=False)
+    first_name =Column(String(100), nullable=False)
+    last_name =Column(String(100), nullable=False)
+    created_at =Column(String(20))
+    updated_at =Column(String(20))
     email =Column(String(80),unique=True, nullable=False) 
     
     # RELATIONSHIP
-     favourites = relationship('Favourite', backref="user", lazy=True)
-     characters = relationship('Character', backref="user", lazy=True)
-     planets = relationship('Planet', backref="user", lazy=True)
+    favorites = relationship('Favorite', backref="user", lazy=True)
+    characters = relationship('Character', backref="user", lazy=True)
+    planets = relationship('Planet', backref="user", lazy=True)
 
 
-class Favourite (Base):
-     __tablename__ = 'favourites'
-    like_id = Column(Integer, primary_key=True)
+class Favorite (Base):
+    __tablename__ = 'favorites'
+    id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.user_id'))
     fav_planet_id = Column(Integer, ForeignKey('planet.planet_id'))
     fav_character_id = Column(Integer, ForeignKey('character.character_id'))
      
      
-class Characters (Base):
-     __tablename__ = 'characters'
-    character_id = Column(Integer, primary_key=True)
+class Character (Base):
+    __tablename__ = 'character'
+    id = Column(Integer, primary_key=True)
     name =  Column(String(200))
     birth_year = Column(Integer)
     gender = Column(String(200))
@@ -65,9 +65,9 @@ class Characters (Base):
     eye_color = Column(String(200))
      
 
-class Planets (Base):
-     __tablename__ = 'planets'
-    planet_id = Column(Integer, primary_key=True)
+class Planet (Base):
+    __tablename__ = 'planet'
+    id = Column(Integer, primary_key=True)
     name = Column(String(200))
     climate = Column(String(200))
     population = Column(Integer)
