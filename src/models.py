@@ -8,7 +8,6 @@ from eralchemy import render_er
 
 Base = declarative_base()
 
-
 # class Person(Base):
 #     __tablename__ = 'person'
 #     # Here we define columns for the table person
@@ -32,24 +31,20 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer,  primary_key=True)
     user_name = Column(String(120), unique=True, nullable=False)
     first_name =Column(String(100), nullable=False)
     last_name =Column(String(100), nullable=False)
     created_at =Column(String(20))
     updated_at =Column(String(20))
     email =Column(String(80),unique=True, nullable=False) 
-    
-    # RELATIONSHIP
-    favorites = relationship('Favorite', backref="user", lazy=True)
-    characters = relationship('Character', backref="user", lazy=True)
-    planets = relationship('Planet', backref="user", lazy=True)
+
 
 
 class Favorite (Base):
     __tablename__ = 'favorites'
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('user.user_id'))
+    user_id = Column(Integer, ForeignKey('user.id'))
     fav_planet_id = Column(Integer, ForeignKey('planet.planet_id'))
     fav_character_id = Column(Integer, ForeignKey('character.character_id'))
      
